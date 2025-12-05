@@ -1,0 +1,28 @@
+# Render Blueprint for Feedback System
+# This file enables one-click deployment on Render
+# Learn more: https://render.com/docs/blueprint-spec
+
+services:
+  # Main Web Service
+  - type: web
+    name: feedback-system
+    runtime: docker
+    plan: free
+    region: oregon
+    branch: main
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: SENDGRID_API_KEY
+        sync: false
+      - key: EMAIL_FROM
+        sync: false
+      - key: FRONTEND_URL
+        sync: false

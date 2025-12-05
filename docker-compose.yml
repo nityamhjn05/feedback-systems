@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  # MongoDB service (optional for local testing)
+  mongodb:
+    image: mongo:7.0
+    container_name: feedback-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+      MONGO_INITDB_DATABASE: feedbackDB
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - feedback-network
+
+  # Feedback System Application
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: feedback-app
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      # Use local MongoDB or your cloud MongoDB URI
+      MONGO_URI: ${MONGO_URI:-mongodb://admin:password123@mongodb:27017/feedbackDB?authSource=admin}
+      JWT_SECRET: ${JWT_SECRET:-supersecret_jwt_key_change_this}
+      PORT: 5000
+      EMAIL_SERVICE: ${EMAIL_SERVICE:-sendgrid}
+      SENDGRID_API_KEY: ${SENDGRID_API_KEY}
+      EMAIL_FROM: ${EMAIL_FROM}
+      FRONTEND_URL: ${FRONTEND_URL:-http://localhost:5000}
+      NODE_ENV: production
+    depends_on:
+      - mongodb
+    networks:
+      - feedback-network
+
+volumes:
+  mongodb_data:
+    driver: local
+
+networks:
+  feedback-network:
+    driver: bridge
