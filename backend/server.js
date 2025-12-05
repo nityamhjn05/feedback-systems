@@ -27,7 +27,8 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "public")));
 
   // Handle React routing, return all requests to React app
-  app.get("*", (req, res) => {
+  // Express 5.x requires explicit wildcard syntax
+  app.get("/*", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "index.html"));
   });
 } else {
