@@ -1,0 +1,43 @@
+.public-navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 1rem 0;
+}
+
+.public-navbar .navbar-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.public-navbar .navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.public-navbar .brand-text {
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    /* Always white on login page due to background */
+    letter-spacing: -0.02em;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.public-navbar .navbar-actions {
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 640px) {
+    .public-navbar .brand-text {
+        font-size: 1.25rem;
+    }
+}

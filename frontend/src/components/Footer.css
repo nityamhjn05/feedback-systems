@@ -1,0 +1,44 @@
+.app-footer {
+    width: 100%;
+    padding: 1.5rem 0;
+    margin-top: auto;
+    background-color: transparent;
+    color: red;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.footer-content {
+    color: red;
+    font-size: 0.875rem;
+}
+
+.footer-link {
+    color: red;
+    text-decoration: none;
+    margin: 0 0.25rem;
+    transition: color 0.2s;
+}
+
+.footer-link:hover {
+    color: var(--secondary);
+    text-decoration: underline;
+}
+
+/* Make footer white on login/public pages */
+.login-container .app-footer {
+    border-top: none;
+    margin-top: 2rem;
+}
+
+.login-container .footer-content {
+    color: #f30d0d;
+}
+
+.login-container .footer-link {
+    color: #ffffff;
+}
+
+.login-container .footer-link:hover {
+    color: red;
+}
