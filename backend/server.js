@@ -26,9 +26,8 @@ if (process.env.NODE_ENV === "production") {
   // Serve static files from the public directory
   app.use(express.static(path.join(__dirname, "public")));
 
-  // Handle React routing, return all requests to React app
-  // Express 5.x requires explicit wildcard syntax
-  app.get("/*", (req, res) => {
+  // Handle React routing - use middleware instead of route for Express 5.x compatibility
+  app.use((req, res) => {
     res.sendFile(path.join(__dirname, "public", "index.html"));
   });
 } else {
